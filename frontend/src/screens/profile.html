@@ -1,70 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>الملف الشخصي</title>
-    <link rel="stylesheet" href="../assets/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile</title>
+  <link rel="stylesheet" href="../assets/style.css" />
 </head>
-<body class="profile-page">
-    <h1>🧑‍💼 الملف الشخصي</h1>
-
-    <div class="profile-container">
-        <img src="../assets/user_avatar.png" alt="User Avatar" class="profile-pic" />
-        <p><strong>الاسم:</strong> <span id="username">...</span></p>
-        <p><strong>ID:</strong> <span id="user-id">...</span></p>
-        <p><strong>النبذة:</strong> <span id="bio">...</span></p>
-        <div class="interests">
-            <h3>الاهتمامات:</h3>
-            <ul id="interests-list">
-                </ul>
-        </div>
-        <button onclick="editProfile()">تعديل الملف الشخصي</button>
-        <button onclick="goBack()">رجوع</button>
+<body>
+  <div class="container">
+    <h2>ملفي الشخصي</h2>
+    <div class="profile-card">
+      <img src="../assets/user_avatar.png" alt="User Avatar" class="avatar"/>
+      <p><strong>الاسم:</strong> <span id="username">...</span></p>
+      <p><strong>ID:</strong> <span id="user-id">...</span></p>
+      <p><strong>النبذة:</strong> <span id="bio">...</span></p>
+      <p><strong>الاهتمامات:</strong> <span id="interests">...</span></p>
     </div>
+    <button onclick="goBack()">رجوع</button>
+  </div>
 
-    <script>
-        // دالة لجلب بيانات المستخدم وعرضها
-        function loadUserProfile() {
-            // افتراض بيانات مستخدم من localStorage أو API
-            // يمكنك استبدال هذا بجلب حقيقي من API
-            const user = JSON.parse(localStorage.getItem('user')) || {
-                name: 'محمد علي',
-                id: '0001',
-                bio: 'مطور ويب مهتم بالتقنيات الحديثة وتصميم واجهات المستخدم.',
-                interests: ['برمجة', 'تصميم', 'قراءة', 'كرة القدم']
-            };
+  <script>
+    // كود لجلب بيانات المستخدم من localStorage أو API
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    document.getElementById('username').textContent = user.name || 'مجهول';
+    document.getElementById('user-id').textContent = user.id || 'غير معروف';
+    document.getElementById('bio').textContent = user.bio || 'لا توجد نبذة';
+    document.getElementById('interests').textContent = user.interests || 'غير محدد';
 
-            document.getElementById('username').textContent = user.name || 'مجهول';
-            document.getElementById('user-id').textContent = '#' + (user.id || '0000');
-            document.getElementById('bio').textContent = user.bio || 'لا توجد نبذة';
-
-            const interestsList = document.getElementById('interests-list');
-            interestsList.innerHTML = ''; // تفريغ القائمة قبل إضافة العناصر الجديدة
-
-            if (user.interests && user.interests.length > 0) {
-                user.interests.forEach(interest => {
-                    const li = document.createElement('li');
-                    li.textContent = '#' + interest;
-                    interestsList.appendChild(li);
-                });
-            } else {
-                const li = document.createElement('li');
-                li.textContent = 'لا توجد اهتمامات محددة';
-                interestsList.appendChild(li);
-            }
-        }
-
-        // استدعاء الدالة عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', loadUserProfile);
-
-        function editProfile() {
-            alert("ميزة التعديل تحت التطوير.");
-        }
-
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 </body>
 </html>
