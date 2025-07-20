@@ -20,3 +20,21 @@ toggleMusicBtn.onclick = () => {
 
 // يمكنك أيضًا تشغيل الموسيقى تلقائيًا عند تحميل الصفحة إذا سمح المتصفح (بعد تفاعل المستخدم عادةً)
 // playMusic(musicTrackUrl);
+// main.js (أو ملف التطبيق الرئيسي)
+
+import { makeDraggable, moveMicToCenter } from './move.js'; // استيراد الدوال
+
+// ... (بقية كود تهيئة التطبيق) ...
+
+// مثال على استخدام makeDraggable:
+// افترض أن لديك زر مايك أو عنصر تريد جعله قابلاً للسحب
+const myMicElement = document.getElementById('my-mic-button'); // يجب أن يكون هذا الـ ID موجودًا في HTML
+if (myMicElement) {
+    makeDraggable(myMicElement);
+    console.log("تم جعل عنصر المايك قابلاً للسحب.");
+}
+
+// مثال على استخدام moveMicToCenter:
+// يمكنك استدعاء هذه الدالة لوضع المايك في المنتصف، ربما عند بدء الغرفة أو بعد إعادة ضبط.
+// تأكد أن العنصر موجود في HTML.
+// moveMicToCenter('my-mic-button'); // استخدم نفس الـ ID الذي جعلته قابلاً للسحب
