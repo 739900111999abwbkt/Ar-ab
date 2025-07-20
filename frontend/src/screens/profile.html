@@ -1,0 +1,36 @@
+<!-- frontend/src/screens/profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Profile</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body class="profile-page">
+  <h1>الملف الشخصي</h1>
+
+  <div class="profile-card">
+    <img src="../assets/default-avatar.png" alt="User Avatar" class="avatar" />
+    <h2 id="username">Username</h2>
+    <p>ID: <span id="user-id">#0000</span></p>
+    <p>نبذة: <span id="bio">نبذة المستخدم</span></p>
+
+    <div class="interests">
+      <h3>الاهتمامات:</h3>
+      <ul id="interests-list">
+        <li>#Music</li>
+        <li>#Gaming</li>
+        <li>#Art</li>
+      </ul>
+    </div>
+
+    <button onclick="editProfile()">تعديل الملف الشخصي</button>
+  </div>
+
+  <script>
+    function editProfile() {
+      alert("ميزة تعديل الملف الشخصي ستتوفر قريبًا.");
+    }
+  </script>
+</body>
+</html>
