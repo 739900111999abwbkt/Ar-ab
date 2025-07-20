@@ -1,0 +1,27 @@
+<!-- room.html -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>غرفتي - AirChat</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div id="room-container">
+    <div class="mic-grid" id="mic-area">
+      <!-- يتم تعبئة المايكات ديناميكياً -->
+    </div>
+
+    <div class="chat-area">
+      <div id="chat-box"></div>
+      <input type="text" id="chat-input" placeholder="اكتب رسالة..." />
+    </div>
+
+    <div class="users-bar" id="users-list">
+      <!-- قائمة المستخدمين -->
+    </div>
+  </div>
+
+  <script src="../socket.js"></script>
+</body>
+</html>
