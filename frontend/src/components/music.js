@@ -1,17 +1,54 @@
-// music.js
+// music.js - مشغل موسيقى بسيط داخل الغرفة (تشغيل/إيقاف/التحقق من حالة المسار)
 
-let backgroundMusic = null;
+// تعريف المتغيرات التي ستُستخدم لتتبع المسار الحالي وكائن الصوت.
+// يُفضّل استخدام كائن Audio واحد وإعادة استخدامه لتحسين الأداء.
+let currentTrack = null; // يُستخدم لتخزين رابط المسار الصوتي الحالي قيد التشغيل
+let audio = new Audio();  // كائن Audio واحد سيتم استخدامه لتشغيل جميع الموسيقى
 
-export function playMusic(filePath) {
-  stopMusic();
-  backgroundMusic = new Audio(filePath);
-  backgroundMusic.loop = true;
-  backgroundMusic.play();
+/**
+ * يقوم بتشغيل مسار موسيقي محدد.
+ * إذا كان نفس المسار قيد التشغيل بالفعل، فإنه سيقوم بإيقافه (وظيفة تبديل).
+ *
+ * @param {string} url - رابط (URL) الملف الصوتي المراد تشغيله.
+ */
+export function playMusic(url) {
+  // التحقق: إذا كان المسار المطلوب هو نفس المسار الحالي وقيد التشغيل،
+  // فهذا يعني أن المستخدم يريد إيقاف تشغيل نفس المسار.
+  if (currentTrack === url && !audio.paused) {
+    stopMusic(); // قم بإيقاف الموسيقى
+    return;      // واخرج من الدالة
+  }
+
+  // تحديث مصدر الصوت لكائن Audio.
+  audio.src = url;
+  // تعيين الخاصية loop إلى true لجعل الموسيقى تتكرر تلقائيًا بعد انتهائها.
+  audio.loop = true;
+
+  // محاولة تشغيل الصوت.
+  // يتم استخدام .catch() لمعالجة أي أخطاء قد تحدث أثناء التشغيل،
+  // مثل القيود المفروضة من المتصفح على التشغيل التلقائي بدون تفاعل المستخدم.
+  audio.play().catch((error) => {
+    console.warn("فشل تشغيل الموسيقى:", error); // تسجيل تحذير في الكونسول عند الفشل
+  });
+
+  // تحديث المسار الحالي الذي تم تشغيله بنجاح.
+  currentTrack = url;
 }
 
+/**
+ * يوقف تشغيل الموسيقى الحالية ويعيدها إلى البداية.
+ */
 export function stopMusic() {
-  if (backgroundMusic) {
-    backgroundMusic.pause();
-    backgroundMusic = null;
-  }
+  audio.pause(); // إيقاف تشغيل الصوت مؤقتًا
+  audio.currentTime = 0; // إعادة وقت تشغيل الصوت إلى الصفر لكي يبدأ من البداية في المرة القادمة
+  currentTrack = null;   // مسح المسار الحالي ليعكس أن لا يوجد شيء قيد التشغيل
+}
+
+/**
+ * يتحقق مما إذا كانت الموسيقى قيد التشغيل حاليًا.
+ *
+ * @returns {boolean} - true إذا كانت الموسيقى تعمل (أي ليست متوقفة مؤقتًا)، false بخلاف ذلك.
+ */
+export function isMusicPlaying() {
+  return !audio.paused;
 }
