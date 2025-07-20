@@ -1,41 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>الإعدادات</title>
-  <link rel="stylesheet" href="../assets/style.css" />
+  <link rel="stylesheet" href="../assets/style.css">
 </head>
-<body class="settings-page">
-  <h1>⚙️ الإعدادات</h1>
+<body>
+  <div class="settings-container">
+    <h2>⚙️ الإعدادات</h2>
 
-  <form id="settingsForm">
-    <label>تغيير الاسم:
-      <input type="text" placeholder="اسم جديد" />
-    </label>
+    <div class="setting">
+      <label>الاسم:</label>
+      <input type="text" id="username" placeholder="اسم المستخدم">
+    </div>
 
-    <label>اختيار الخلفية:
-      <select>
-        <option>افتراضية</option>
-        <option>خلفية ليلية</option>
-        <option>نجوم</option>
+    <div class="setting">
+      <label>الخلفية:</label>
+      <select id="bg-select">
+        <option value="">اختر الخلفية</option>
+        <option value="light">فاتحة</option>
+        <option value="dark">داكنة</option>
+        <option value="custom">مخصصة</option>
       </select>
-    </label>
+    </div>
 
-    <label>اللغة:
-      <select>
-        <option>العربية</option>
-        <option>English</option>
+    <div class="setting">
+      <label>اللغة:</label>
+      <select id="lang-select">
+        <option value="ar">العربية</option>
+        <option value="en">English</option>
       </select>
-    </label>
+    </div>
 
-    <button type="submit">حفظ التغييرات</button>
-  </form>
+    <div class="actions">
+      <button onclick="saveSettings()">💾 حفظ</button>
+      <button onclick="goBack()">↩️ رجوع</button>
+    </div>
+  </div>
 
   <script>
-    document.getElementById("settingsForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      alert("تم حفظ الإعدادات بنجاح!");
-    });
+    function saveSettings() {
+      const name = document.getElementById("username").value;
+      const bg = document.getElementById("bg-select").value;
+      const lang = document.getElementById("lang-select").value;
+
+      localStorage.setItem("user_name", name);
+      localStorage.setItem("background", bg);
+      localStorage.setItem("language", lang);
+
+      alert("تم حفظ الإعدادات ✅");
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+
+    // تحميل الإعدادات السابقة
+    window.onload = () => {
+      document.getElementById("username").value = localStorage.getItem("user_name") || "";
+      document.getElementById("bg-select").value = localStorage.getItem("background") || "";
+      document.getElementById("lang-select").value = localStorage.getItem("language") || "ar";
+    };
   </script>
 </body>
 </html>
