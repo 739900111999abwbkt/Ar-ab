@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>الإعدادات</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body class="settings-page">
+  <h1>⚙️ الإعدادات</h1>
+
+  <form id="settingsForm">
+    <label>تغيير الاسم:
+      <input type="text" placeholder="اسم جديد" />
+    </label>
+
+    <label>اختيار الخلفية:
+      <select>
+        <option>افتراضية</option>
+        <option>خلفية ليلية</option>
+        <option>نجوم</option>
+      </select>
+    </label>
+
+    <label>اللغة:
+      <select>
+        <option>العربية</option>
+        <option>English</option>
+      </select>
+    </label>
+
+    <button type="submit">حفظ التغييرات</button>
+  </form>
+
+  <script>
+    document.getElementById("settingsForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("تم حفظ الإعدادات بنجاح!");
+    });
+  </script>
+</body>
+</html>
