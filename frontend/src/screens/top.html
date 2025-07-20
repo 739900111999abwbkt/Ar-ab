@@ -1,39 +1,37 @@
-تمام ✅ ننتقل الآن إلى:
-
-
----
-
-🔍 ثانيًا: top.html
-
-<!-- frontend/src/screens/top.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Top Users</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>المتصدرون</title>
   <link rel="stylesheet" href="../assets/style.css" />
 </head>
-<body class="top-users-page">
-  <h1>🏆 قائمة أفضل المستخدمين</h1>
-
-  <div class="top-users">
+<body>
+  <div class="container">
+    <h2>🎖️ قائمة المتصدرين (Top Users)</h2>
     <ol id="top-users-list">
-      <li>🎖️ Ahmed - 1500 نقطة</li>
-      <li>🥈 Sara - 1300 نقطة</li>
-      <li>🥉 Ali - 1100 نقطة</li>
+      <!-- سيتم تعبئة القائمة ديناميكياً -->
     </ol>
+    <button onclick="goBack()">رجوع</button>
   </div>
 
   <script>
-    // يمكن لاحقًا الربط بـ backend لجلب البيانات الحقيقية
+    const topUsers = JSON.parse(localStorage.getItem('top_users') || '[]');
+    const list = document.getElementById('top-users-list');
+
+    if (topUsers.length === 0) {
+      list.innerHTML = "<li>لا يوجد بيانات للعرض.</li>";
+    } else {
+      topUsers.forEach((user, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `#${index + 1} - ${user.name} 🪙 <strong>${user.gifts} هدية</strong>`;
+        list.appendChild(li);
+      });
+    }
+
+    function goBack() {
+      window.history.back();
+    }
   </script>
 </body>
 </html>
-
-
----
-
-التالي: settings.html؟
-أو أحد ملفات الـ JS مثل chat_private.js؟
-اكتب فقط: "التالي: settings.html" أو أي ملف تريده.
-
