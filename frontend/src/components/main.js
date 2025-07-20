@@ -30,4 +30,28 @@ micButton.addEventListener('click', () => {
     // } else {
     //     playSound('micOff');
     // }
-});
+}); // main.js (أو ملف التطبيق الرئيسي)
+
+import { changeRoomBackground } from './bg.js'; // استيراد الدالة من ملف bg.js
+
+// ... (بقية كود تهيئة تطبيقك) ...
+
+// مثال على استخدام الدالة:
+const changeBgBtn = document.getElementById("change-bg-btn"); // افترض أن لديك زر بهذا المعرّف في ملف HTML
+const backgroundImages = [
+    'https://picsum.photos/seed/bg-new1/1920/1080', // رابط صورة مثال 1
+    'https://picsum.photos/seed/bg-new2/1920/1080', // رابط صورة مثال 2
+    'https://picsum.photos/seed/bg-new3/1920/1080'  // رابط صورة مثال 3
+];
+let currentBgIndex = 0; // مؤشر لتتبع الصورة الحالية
+
+// ربط الدالة بحدث النقر على الزر
+changeBgBtn.onclick = () => {
+    // الانتقال إلى الصورة التالية في القائمة (والعودة للأولى بعد الأخيرة)
+    currentBgIndex = (currentBgIndex + 1) % backgroundImages.length;
+    // استدعاء الدالة لتغيير الخلفية
+    changeRoomBackground(backgroundImages[currentBgIndex]);
+};
+
+// تعيين خلفية أولية عند تحميل الصفحة لكي لا تكون فارغة في البداية
+changeRoomBackground(backgroundImages[currentBgIndex]);
