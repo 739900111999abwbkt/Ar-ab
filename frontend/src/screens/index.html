@@ -1,12 +1,111 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0;url=screens/login.html" />
-  <title>AirChat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غرفتي الافتراضية (AirChat)</title>
+    <base href="/Ar-ab/"> 
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* إضافة بعض التصميم الأساسي هنا إذا لم يكن موجودًا في style.css بعد */
+        body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; background-color: #0d0d0d; color: #fff; }
+        #room-container {
+            width: 100vw;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* يدفع صندوق الدردشة للأسفل */
+            align-items: center;
+            position: relative;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            z-index: 100; /* للتأكد من ظهوره فوق الخلفية */
+        }
+        #chat-box {
+            width: 90%;
+            max-width: 400px;
+            height: 200px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            overflow-y: scroll;
+            background-color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .chat-message {
+            margin-bottom: 5px;
+            color: #333; /* لون نص الرسالة داخل الصندوق الأبيض */
+        }
+        .chat-message strong {
+            color: #007bff; /* لون اسم المستخدم */
+        }
+        #chat-input-container {
+            display: flex;
+            width: 90%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+        #chat-input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+            background-color: #f0f0f0; /* فاتح ليتناسب مع chat-box */
+            color: #333;
+        }
+        #send-btn {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        .mic-circle {
+            /* تصميم من ملف style.css، للتأكيد يمكن وضعه هنا مؤقتا */
+            width: 60px; height: 60px; border-radius: 50%;
+            background: radial-gradient(#00e5ff, #007acc);
+            display: flex; align-items: center; justify-content: center;
+            margin: 8px; box-shadow: 0 0 10px #00e5ff;
+            position: absolute; /* مهم لتفعيل التحريك */
+            cursor: grab;
+        }
+    </style>
 </head>
 <body>
-  <p>جاري التحويل...</p>
+    <div id="room-container">
+        <div id="controls">
+            <button id="change-bg-btn">تغيير الخلفية</button>
+            <button id="toggle-music-btn">موسيقى</button>
+            </div>
+
+        <div id="chat-box">
+            </div>
+        <div id="chat-input-container">
+            <input type="text" id="chat-input" placeholder="اكتب رسالتك...">
+            <button id="send-btn">إرسال</button>
+        </div>
+        
+        <div id="my-mic-button" class="mic-circle" style="bottom: 80px; left: 50px;">
+            </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <script type="module" src="main.js"></script>
+
 </body>
 </html>
